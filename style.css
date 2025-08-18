@@ -1,0 +1,376 @@
+/* VARIABLES */
+:root{
+    /* Degradado de fondo en tonos verdes suaves */
+    --bg-start: #f0fbf5; /* tono superior muy suave */
+    --bg-mid:   #e6f8ee; /* tono intermedio */
+    --bg-end:   #dff3e6; /* tono inferior */
+    
+    /* Colores más oscuros para encabezados, índices y botones */
+    --accent:    #3f8f47; /* color principal (encabezado sólido) */
+    --accent-2:  #2f6f38; /* color más oscuro para botones */
+    --panel:#f5f9f8;
+    --muted:#9aaea0;
+    --shadow-1: 0 4px 10px rgba(18,52,61,0.08);
+    --shadow-2: 0 10px 20px rgba(18,52,61,0.10);
+    --inset-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+    --radius:10px;
+    --transition:200ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* BASE */
+*{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+body{
+    margin:0;
+    /* usar degradado basado en las nuevas variables */
+    background: linear-gradient(180deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+    color:#0b2b24;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:18px;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    background: var(--accent); /* sólido en lugar de degradado */
+    padding:12px 20px;
+    border-radius:12px;
+    box-shadow: var(--shadow-1);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+header:hover{ box-shadow: var(--shadow-2); transform: translateY(-2px); }
+header h1{ margin:0; font-size:1.25rem; text-align:center; flex:1; font-weight:700; color: #fff; }
+
+/* BOTONES */
+button{
+    -webkit-tap-highlight-color: transparent;
+    cursor:pointer;
+    border: none;
+    background: var(--accent-2); /* color más oscuro para botones */
+    color: #fff;
+    padding:8px 12px;
+    border-radius:8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: transform var(--transition), box-shadow var(--transition), opacity 120ms;
+    transform: translateZ(0);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+button:hover{ transform: translateY(-3px); box-shadow: 0 14px 26px rgba(76,175,80,0.14); }
+button:active{
+    transform: translateY(0) scale(0.995);
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.06);
+    opacity:0.98;
+}
+
+/* ICON BUTTON SMALL */
+.list-item button, .series-container button{
+    padding:6px 8px;
+    border-radius:8px;
+    background:linear-gradient(180deg,#d7f0e0,#bfe9d0);
+    color:#08311f;
+    box-shadow: 0 6px 10px rgba(2,48,32,0.06);
+}
+.list-item button:hover, .series-container button:hover{ transform: translateY(-2px); }
+
+/* TARJETAS / LIST ITEMS */
+.list-item{
+    background: transparent;
+    box-shadow: none;
+    padding: 8px 0; /* ajustar espaciado sin la "tarjeta" */
+    border-radius: 0;
+}
+.list-item:hover{
+    transform: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* Filas de series sin fondo ni sombra */
+.series-container > div{
+    background: transparent;
+    box-shadow: none;
+    padding: 6px 0;
+    border-radius: 0;
+}
+
+/* INPUTS */
+input[type="text"], .series-container input, textarea, .notes {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 6px 4px;
+    font-size: 1rem;
+}
+
+/* Quitar cualquier borde/linea negra en inputs y textarea, mantener outline personalizado en :focus */
+input, input[type="text"], input[disabled], textarea, textarea[disabled], .list-item input, .series-container input {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+    background-clip: padding-box;
+}
+
+/* Mantener tu estilo de foco accesible (redefínelo si quieres otro color) */
+input:focus, textarea:focus {
+    outline: 3px solid rgba(102,187,106,0.18);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Si algún navegador sigue mostrando linea bajo el input */
+input::-webkit-textfield-decoration-container,
+input::-webkit-search-decoration,
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { display: none; }
+
+/* SERIES (ejercicio) */
+.series-header{
+    background: linear-gradient(180deg,#f0fbf6,#e8f9ef);
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:10px;
+    box-shadow: var(--shadow-1);
+    display:flex;
+    gap:6px;
+}
+.series-header > div{ flex:1; text-align:center; font-weight:700; color:#0b3b2f; }
+
+/* filas series */
+.series-container > div{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    padding:8px;
+    border-radius:8px;
+    background:#fff;
+    box-shadow: 0 6px 14px rgba(8,43,31,0.04);
+    margin-bottom:8px;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.series-container > div:active{ transform: translateY(0); box-shadow: inset 0 3px 10px rgba(0,0,0,0.04); }
+
+/* NOTAS */
+.notes{
+    width:100%;
+    min-height:80px;
+    border-radius:10px;
+    padding:10px;
+    border:1px solid rgba(11,43,36,0.06);
+    box-shadow: 0 6px 12px rgba(8,43,31,0.04);
+    resize: vertical;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+/* TIMER: por defecto oculto; cuando está activo se fija abajo */
+#timerContainer {
+    display: none; /* oculto por defecto */
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 1200;
+    margin: 0;
+    text-align: center;
+    color: var(--accent-2);
+    font-size: 2.0rem;
+    line-height: 1;
+    padding: 10px 14px;
+    transition: color 180ms ease, transform 180ms ease, opacity 180ms;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(8,43,31,0.06);
+    backdrop-filter: blur(6px);
+    pointer-events: none; /* no interfiere con toques */
+    opacity: 0;
+}
+
+/* clase que activa y muestra el timer */
+#timerContainer.timer-active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Estado de advertencia (últimos segundos) sigue aplicando en rojo */
+.timer-warning {
+    color: #d32f2f !important;      /* rojo */
+    /* no usar transform aquí para no romper translateX(-50%) */
+    transform: translateX(-50%) !important;
+    /* efecto de aviso únicamente con sombra/opacity, sin escalar */
+    box-shadow: 0 10px 24px rgba(211,47,47,0.08);
+    animation: timer-pulse-shadow 900ms ease-in-out infinite;
+}
+
+/* animación que pulsa la sombra / opacidad, sin tocar transform */
+@keyframes timer-pulse-shadow {
+    0%   { box-shadow: 0 8px 18px rgba(211,47,47,0.06); opacity: 1; }
+    50%  { box-shadow: 0 16px 28px rgba(211,47,47,0.10); opacity: 0.94; }
+    100% { box-shadow: 0 8px 18px rgba(211,47,47,0.06); opacity: 1; }
+}
+
+/* ACCESIBILIDAD */
+button:focus, input:focus, textarea:focus{
+    outline: 3px solid rgba(102,187,106,0.18);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* 3D táctil / mobile-first - efectos suaves y rendimiento */
+main#contenido {
+    perspective: 900px;
+    -webkit-perspective: 900px;
+}
+
+/* --- Desactivar efecto 3D previo (sobrescribe) --- */
+button,
+.list-item,
+.series-container > div {
+    transform: none !important;
+    transition: box-shadow 180ms ease, opacity 120ms ease !important;
+    backface-visibility: visible !important;
+}
+
+/* --- Forzar desactivación del 3D/touch-press visual (sobrescribe reglas previas) */
+button,
+.list-item,
+.series-container > div,
+.list-item.is-pressed,
+.series-container > div.is-pressed {
+    transform: none !important;
+    transition: box-shadow 180ms ease, opacity 120ms ease !important;
+    backface-visibility: visible !important;
+    will-change: auto !important;
+    box-shadow: var(--shadow-1) !important;
+    opacity: 1 !important;
+}
+
+/* Evitar cualquier transformación en hover/active que provenga de reglas anteriores */
+@media (hover: hover) and (pointer: fine) {
+    header:hover,
+    button:hover,
+    .list-item:hover,
+    .series-container > div:hover,
+    .list-item button:hover,
+    .series-container button:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-1) !important;
+        opacity: 1 !important;
+        background: inherit !important;
+    }
+}
+button:active,
+.list-item:active,
+.series-container > div:active,
+.list-item.is-pressed,
+.series-container > div.is-pressed {
+    transform: none !important;
+    box-shadow: var(--shadow-1) !important;
+    opacity: 1 !important;
+}
+
+/* Mantener el foco por teclado (accesibilidad) */
+button:focus, input:focus, textarea:focus {
+    outline: 3px solid rgba(102,187,106,0.18);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* --- Ripple --- */
+button, .list-item, .series-container > div {
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* elemento ripple creado por JS */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0.6;
+    pointer-events: none;
+    background: rgba(255,255,255,0.45); /* para botones claros */
+    will-change: transform, opacity;
+    animation: ripple-anim 600ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* variante para fondos claros donde mejor queda oscuro */
+.ripple.dark {
+    background: rgba(0,0,0,0.12);
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* versión más rápida en móvil */
+@media (max-width: 600px) {
+    .ripple { animation-duration: 420ms; }
+}
+
+/* Mantener accesibilidad (focus visual) */
+button:focus, input:focus, textarea:focus {
+    outline: 3px solid rgba(102,187,106,0.18);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Pequeño "lift" visual al enfocar por teclado (accesibilidad) */
+button:focus, .list-item:focus, .series-container > div:focus {
+    transform: translateY(-6px) translateZ(10px);
+    box-shadow: 0 14px 30px rgba(8,43,31,0.06);
+}
+
+/* Forzar que NO cambien color ni fondo de header y botones al pasar el cursor */
+@media (hover: hover) and (pointer: fine) {
+    header:hover {
+        /* mantener exactamente el mismo fondo que el header por defecto */
+        background: linear-gradient(180deg,#cdebdc,#bde8cf) !important;
+        color: inherit !important;
+    }
+    header:hover h1,
+    header:hover > * {
+        color: inherit !important;
+    }
+
+    button:hover,
+    .list-item button:hover,
+    .series-container button:hover {
+        background: var(--accent) !important; /* mismo color que por defecto */
+        color: #fff !important;               /* mismo color que por defecto */
+        box-shadow: var(--shadow-1) !important; /* opcional: mantener sombra por defecto */
+        transform: none !important;           /* evitar transformaciones visuales */
+        opacity: 1 !important;
+    }
+
+    .list-item:hover,
+    .series-container > div:hover {
+        background: transparent !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+}
+
+/* Mantener focus para accesibilidad (no tocar) */
+button:focus, input:focus, textarea:focus {
+    outline: 3px solid rgba(102,187,106,0.18);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
