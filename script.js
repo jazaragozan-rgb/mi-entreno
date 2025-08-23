@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC-WK2L9XJ1j7-8O4cofd5d3QSySx0nPOU",
+  apiKey: "AIzaSyBYQPw0eoEtCZQ5NHYKHgXfcHpaW_ySzKU",
   authDomain: "sesionmientreno.firebaseapp.com",
   projectId: "sesionmientreno",
   storageBucket: "sesionmientreno.firebasestorage.app",
@@ -464,4 +464,5 @@ function mostrarConfirmacion(mensaje,onConfirm){
 
 // Inicializar
 renderizar();
+
 
