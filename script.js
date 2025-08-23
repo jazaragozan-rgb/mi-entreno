@@ -7,7 +7,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyC-WK2L9XJ1j7-8O4cofd5d3QSySx0nPOU",
   authDomain: "sesionmientreno.firebaseapp.com",
   projectId: "sesionmientreno",
-  storageBucket: "sesionmientreno.appspot.com", // ✅ corregido
+  storageBucket: "sesionmientreno.firebasestorage.app",
   messagingSenderId: "525949014274",
   appId: "1:525949014274:web:1612707e63c01cb0109972"
 };
@@ -464,3 +464,4 @@ function mostrarConfirmacion(mensaje,onConfirm){
 
 // Inicializar
 renderizar();
+
