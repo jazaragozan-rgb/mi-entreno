@@ -1,24 +1,24 @@
 // ==================== Firebase Auth ====================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { 
-  getAuth, onAuthStateChanged, 
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
-  sendEmailVerification 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-// ⚡ Configuración de tu Firebase (reemplaza con tus datos)
 const firebaseConfig = {
-  apiKey: "AIzaSyBYQPw0eoEtCZQ5NHYKHgXfcHpaW_ySzKU",
+  apiKey: "AIzaSyC-WK2L9XJ1j7-8O4cofd5d3QSySx0nPOU",
   authDomain: "sesionmientreno.firebaseapp.com",
   projectId: "sesionmientreno",
-  storageBucket: "sesionmientreno.firebasestorage.app",
-  messagingSenderId: "730288236333",
-  appId: "1:730288236333:web:e4418ca39ffcd48f47d5a4",
-  measurementId: "G-T8QZ7WZT5Y"
+  storageBucket: "sesionmientreno.appspot.com", // ✅ corregido
+  messagingSenderId: "525949014274",
+  appId: "1:525949014274:web:1612707e63c01cb0109972"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
+// 🔹 tu código original sigue aquí sin cambios
+// funciones: login(), register(), salir(), listeners de botones, onAuthStateChanged, etc.
+
 
 // Helpers
 const $ = (id) => document.getElementById(id);
