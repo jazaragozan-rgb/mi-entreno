@@ -1,104 +1,160 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Entreno</title>
-  <link rel="stylesheet" href="./style.css">
-  <style>
-    /* Estilos de formularios e inputs */
-    form {padding:12px;border-radius:8px;margin:10px 0; background:none; border:none;}
-    input {display:block;width:calc(75%);padding:8px;margin:6px auto;border:1px solid #ccc;border-radius:6px;box-sizing:border-box;}
-    button {padding:8px 12px;border:0;border-radius:6px;cursor:pointer;}
-    .hidden {display:none;}
-    .hint {font-size:0.9rem;color:#555;}
-    .err {color:#b00020;}
-    .ok {color:green;}
-    section {margin:12px 0;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Entreno</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* Estilos de formularios y inputs existentes */
+      form {padding:12px;border-radius:8px;margin:10px 0; background:none; border:none;}
+      input {display:block;width:calc(75%);padding:8px;margin:6px auto;border:1px solid #ccc;border-radius:6px;box-sizing:border-box;} /* centrado */
+      button {padding:8px 12px;border:0;border-radius:6px;cursor:pointer;}
+      .hidden {display:none;}
+      .hint {font-size:0.9rem;color:#555;}
+      .err {color:#b00020;}
+      .ok {color:green;}
+      section {margin:12px 0;}
 
-    /* Encabezado */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #1e1e1e;
-      color: white;
-      padding: 0 12px;
-      height: 60px;
-      box-sizing: border-box;
-    }
+      /* Encabezado general con altura fija */
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1e1e1e;
+        color: white;
+        padding: 0 12px;
+        height: 60px; /* altura fija */
+        box-sizing: border-box;
+      }
 
-    header h1 {
-      margin: 0;
-      font-size: 1.2rem;
-      text-align: center;
-      flex: 1;
-    }
+      /* Título siempre centrado */
+      header h1 {
+        margin: 0;
+        font-size: 1.2rem;
+        text-align: center;
+        flex: 1;
+      }
 
-    .header-btn {
-      background: #0d6efd;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
+      /* Botones del encabezado */
+      .header-btn {
+        background: none;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
 
-    header > .header-btn:empty { display: none; }
+      /* Oculta botones automáticamente si no existen */
+      header > .header-btn:empty {
+        display: none;
+      }
 
-    #form-login button, #form-register button, #showRegisterBtn, #showLoginBtn {
-      background: #0d6efd;
-      color: white;
-      width: calc(75%);
-      margin: 6px auto;
-      display: block;
-      text-align: center;
-    }
+      /* Botones de login/registro con mismo ancho y estilo */
+      #form-login button, #form-register button, #showRegisterBtn, #showLoginBtn {
+        background: #0d6efd;
+        color: white;
+        width: calc(75%);
+        margin: 6px auto;
+        display: block;
+        text-align: center;
+      }
 
-    #form-login h3, #form-register h3 { text-align: center; }
-  </style>
+      /* Centrar texto de cabecera de formularios */
+      #form-login h3, #form-register h3 {
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
-  <header>
+<header>
+  <!-- Botón de menú lateral en el header -->
+<button id="menuButton" class="header-btn">&#9776;</button>
+  <h1 id="tituloNivel">Entrenamiento</h1>
+  <div id="headerButtons">
     <button id="backButton" class="header-btn big-btn">←</button>
-    <h1 id="tituloNivel">Entrenamiento</h1>
     <button id="addButton" class="header-btn big-btn plus-btn">+</button>
-  </header>
+  </div>
+  <button id="logoutButton" class="header-btn big-btn power-btn">⏻</button>
+</header>
 
-  <!-- Autenticación -->
-  <section id="auth">
-    <form id="form-login" onsubmit="return false;">
-      <h3>Iniciar sesión</h3>
-      <input id="log-email" type="email" placeholder="Email" required>
-      <input id="log-pass" type="password" placeholder="Contraseña" required>
-      <button onclick="login()">Entrar</button>
-      <button type="button" id="showRegisterBtn">Crear cuenta nueva</button>
-      <div id="log-msg" class="hint"></div>
-    </form>
+<!-- Secciones principales -->
+<main id="seccionEntrenamiento" class="seccion hidden">Contenido de Entrenamiento</main>
+<main id="seccionSeguimiento" class="seccion hidden">Contenido de Seguimiento</main>
+<main id="seccionCalendario" class="seccion hidden">Contenido de Calendario</main>
 
-    <form id="form-register" class="hidden" onsubmit="return false;">
-      <h3>Registro</h3>
-      <input id="reg-email" type="email" placeholder="Email" required>
-      <input id="reg-pass" type="password" placeholder="Contraseña (mín. 6 caracteres)" minlength="6" required>
-      <input id="reg-pass2" type="password" placeholder="Repite la contraseña" minlength="6" required>
-      <button onclick="register()">Crear cuenta</button>
-      <button type="button" id="showLoginBtn">Ya tengo cuenta</button>
-      <div id="reg-msg" class="hint"></div>
-    </form>
-  </section>
+<!-- Overlay semi-transparente -->
+<div id="menuOverlay" class="hidden"></div>
 
-  <!-- App -->
-  <section id="app" class="hidden">
-    <p id="welcome"></p>
-    <p id="verify-hint" class="hint"></p>
-    <button onclick="salir()">Cerrar sesión</button>
-  </section>
+<!-- Menú lateral -->
+<nav id="sideMenu" class="sideMenu">
+    <button id="btnEntrenamiento" class="sideMenu-btn" data-seccion="entrenamiento">Entrenamiento</button>
+    <button id="btnSeguimiento" class="sideMenu-btn" data-seccion="seguimiento">Seguimiento</button>
+    <button id="btnCalendario" class="sideMenu-btn" data-seccion="calendario">Calendario</button>
+</nav>
 
-  <main id="contenido" class="hidden"></main>
-  <div id="timerContainer" class="hidden"></div>
 
-  <script type="module" src="./script.js"></script>
+    <!-- 🔹 Sección de autenticación -->
+    <section id="auth">
+      <!-- LOGIN (visible al inicio) -->
+      <form id="form-login" onsubmit="return false;">
+        <h3>Iniciar sesión</h3>
+        <input id="log-email" type="email" placeholder="Email" required>
+        <input id="log-pass" type="password" placeholder="Contraseña" required>
+        <button onclick="login()">Entrar</button>
+        <button type="button" id="showRegisterBtn">Crear cuenta nueva</button>
+        <div id="log-msg" class="hint"></div>
+      </form>
+
+      <!-- REGISTRO (oculto hasta pulsar el botón) -->
+      <form id="form-register" class="hidden" onsubmit="return false;">
+        <h3>Registro</h3>
+        <input id="reg-email" type="email" placeholder="Email" required>
+        <input id="reg-pass" type="password" placeholder="Contraseña (mín. 6 caracteres)" minlength="6" required>
+        <input id="reg-pass2" type="password" placeholder="Repite la contraseña" minlength="6" required>
+        <button onclick="register()">Crear cuenta</button>
+        <button type="button" id="showLoginBtn">Ya tengo cuenta</button>
+        <div id="reg-msg" class="hint"></div>
+      </form>
+    </section>
+
+    <!-- 🔹 Visible solo si hay sesión iniciada -->
+    <section id="app" class="hidden">
+      <p id="welcome"></p>
+      <p id="verify-hint" class="hint"></p>
+    </section>
+
+    <!-- Tus apartados originales (ocultos hasta login correcto) -->
+    <main id="contenido" class="hidden"></main>
+    <div id="timerContainer" class="hidden"></div>
+
+    <!-- Script con Firebase + App -->
+    <script type="module" src="script.js"></script>
+    <!-- Barra inferior de navegación -->
+
+<!-- Footer fijo -->
+<footer id="footerNav" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #1e1e1e;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+">
+  <button id="navHome" class="footer-btn">
+    <img src="iconos/Home.png" alt="Home" style="height:24px;">
+  </button>
+  <button id="navSettings" class="footer-btn">
+    <img src="iconos/Settings.png" alt="Ajustes" style="height:24px;">
+  </button>
+</footer>
 </body>
 </html>
